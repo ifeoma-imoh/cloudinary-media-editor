@@ -1,11 +1,11 @@
 import Script from "next/script";
 import styles from "../styles/Home.module.css";
 import startEditing from "../utils/startEditing";
+import { cloudName, uploadPreset } from "../utils/cloudinaryConfig";
 
 export default function Home() {
   const handleUpload = async (e) => {
-    const clUrl = "https://api.cloudinary.com/v1_1/ifeomaimoh/image/upload";
-    const uploadPreset = "testpreset";
+    const clUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);

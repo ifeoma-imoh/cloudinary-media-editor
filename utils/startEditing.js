@@ -1,7 +1,9 @@
+import { cloudName } from "./cloudinaryConfig";
+
 function startEditing(publicId) {
   const myEditor = cloudinary.mediaEditor();
   myEditor.update({
-    cloudName: "ifeomaimoh",
+    cloudName: cloudName,
     publicIds: [publicId],
     image: {
       steps: ["resizeAndCrop", "imageOverlay", "textOverlays", "export"],
