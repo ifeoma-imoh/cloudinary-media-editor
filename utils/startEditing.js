@@ -1,5 +1,4 @@
 import { cloudName } from "./cloudinaryConfig";
-
 function startEditing(publicId) {
   const myEditor = cloudinary.mediaEditor();
   myEditor.update({
@@ -8,8 +7,6 @@ function startEditing(publicId) {
     image: {
       steps: ["resizeAndCrop", "imageOverlay", "textOverlays", "export"],
       resizeAndCrop: {
-        toggleAspectRatio: true,
-        aspectRatioLock: true,
         flip: true,
         rotate: true,
         presets: [
@@ -19,6 +16,12 @@ function startEditing(publicId) {
           "landscape-4:3",
           "portrait-3:4",
           "portrait-9:16",
+          "facebookAd",
+          "facebookCover",
+          "instagramStory",
+          "twitterAd",
+          "linkedInAd",
+          "linkedInCover",
           { label: "Cover Ad", width: 500, height: 1000 },
         ],
       },
@@ -27,7 +30,6 @@ function startEditing(publicId) {
           {
             publicId: "logo",
             label: "Logo",
-            transformation: [],
             placementOptions: [
               "right",
               "left",
@@ -42,9 +44,22 @@ function startEditing(publicId) {
           },
         ],
       },
-
       textOverlays: {
-        presets: ["heading", "subtitle", "body", "caption"],
+        presets: [
+          "heading",
+          "subtitle",
+          "body",
+          "caption",
+          {
+            label: "My Header",
+            size: 100,
+            font: "Helvetica",
+            previewText: "ABC",
+            weight: "bold",
+            style: "italic",
+            color: "#ffffff",
+          },
+        ],
         initialColors: [
           "#3448c5",
           "#ff5050",
@@ -56,20 +71,13 @@ function startEditing(publicId) {
         ],
         showColorPicker: true,
       },
-
       export: {
         formats: ["auto", "png", "webp"],
         quality: ["auto", "best", "good", 55, 75, "low"],
         download: true,
-        share: true,
       },
     },
   });
   myEditor.show();
-  myEditor.on("export", function (data) {
-    console.log(data);
-    window.open(data.assets[0].downloadUrl, "_blank");
-  });
 }
-
 export default startEditing;
